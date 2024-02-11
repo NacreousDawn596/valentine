@@ -15,22 +15,20 @@ const e = {
     "excited-spin": "https://media1.tenor.com/m/aKFaZBrZFYcAAAAC/excited-spin.gif"
 }
 
-const preloadedImages = {};
+const preloadedImages = [];
 let loadedImages = 0;
 const totalImages = Object.keys(e).length;
 
 // I don't really know wtf am I doing
 function preloadImages() {
-    for (const key in e) {
-        if (e.hasOwnProperty(key)) {
-            const img = new Image();
-            img.src = e[key];
-            preloadedImages[key] = img;
-            img.onload = () => {
-                loadedImages++;
-                if (loadedImages === totalImages) {
-                    showInitialMessage();
-                }
+    for (const url of [...Object.values(e), ...window.pictures]) {
+        const img = new Image();
+        img.src = url;
+        preloadedImages.push(img);
+        img.onload = () => {
+            loadedImages++;
+            if (loadedImages === totalImages) {
+                showInitialMessage();
             }
         }
     }
@@ -40,13 +38,29 @@ function preloadImages() {
 function showInitialMessage() {
     document.getElementById("loading").style.display = "none"
     const initialMessage = Object.keys(e)[0];
-    const initialImage = preloadedImages[initialMessage];
+    const initialImage = preloadedImages[0];
     document.getElementById("message").textContent = initialMessage;
     document.getElementById("pic").src = initialImage.src;
 }
 
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function choose(choices) {
+    return choices[Math.floor(Math.random() * choices.length)];
+}
+
 window.addEventListener("load", () => {
+    let messages = Object.keys(e).slice(0, -2);
+    let currentIndex = 0;
+
     preloadImages();
+
     document.getElementById("yes").addEventListener("click", () => {
         document.getElementById("message").textContent = "YIPEEEEEEEEE!! :3";
         document.getElementById("pic").src = "https://media1.tenor.com/m/aKFaZBrZFYcAAAAC/excited-spin.gif";
@@ -54,20 +68,19 @@ window.addEventListener("load", () => {
     });
 
     document.getElementById("no").addEventListener("click", () => {
-        const keys = Object.keys(e);
-        const currentIndex = keys.indexOf(document.getElementById("message").textContent);
-        const nextIndex = currentIndex < keys.length - 1 ? currentIndex + 1 : currentIndex;
-        const nextMessage = keys[nextIndex];
-        const nextImage = preloadedImages[nextMessage];
+        const nextMessage = messages[currentIndex];
+        const nextImage = preloadedImages[currentIndex];
         document.getElementById("message").textContent = nextMessage;
         document.getElementById("pic").src = nextImage.src;
 
-        if (nextIndex === keys.length - 2) {
-            document.querySelectorAll(".button").forEach(button => button.classList.add("hidden"));
-            setTimeout(() => {
-                window.location.href = "https://www.wikihow.health/Help-Loved-Ones-with-Delusional-Disorder";
-                // lmao
-            }, 2000)
+        // currentIndex = (currentIndex + 1) % messagesa.length;
+        currentIndex++
+
+        if (currentIndex === messages.length - 1) {
+            document.getElementById("message").textContent = choose(window.messages);
+            console.log(choose(window.messages))
+            document.getElementById("pic").src = choose(window.pictures);
+            currentIndex--
         }
     });
 });
