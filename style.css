@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
 body {
     background-color: #dfd6f5;
     font-family: Arial, sans-serif;
@@ -37,6 +39,7 @@ button {
     font-size: 4vw;
     cursor: pointer;
     transition-duration: 0.3s;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 button:hover {
