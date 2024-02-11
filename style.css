@@ -5,6 +5,8 @@ body {
     font-family: Arial, sans-serif;
     position: relative;
     overflow: hidden;
+    user-select: none;
+    user-zoom: none;
 }
 
 .hidden {
