@@ -1,10 +1,14 @@
+/* author: Aferiad Kamal
+github: github.com/nacreousdawn596/valentine
+more about me: afriad-kamal.github.io/about-me */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
 body {
     background-color: #dfd6f5;
     font-family: Arial, sans-serif;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
     user-select: none;
     user-zoom: none;
 }

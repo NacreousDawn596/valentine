@@ -1,3 +1,7 @@
+// author: Aferiad Kamal
+// github: github.com/nacreousdawn596/valentine
+// more about me: afriad-kamal.github.io/about-me
+
 window.messages = [
     "will you be my valentine?",
     "think again",

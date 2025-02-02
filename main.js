@@ -1,3 +1,7 @@
+// author: Aferiad Kamal
+// github: github.com/nacreousdawn596/valentine
+// more about me: afriad-kamal.github.io/about-me
+
 const e = {
     "will you be my valentine?": "https://media1.tenor.com/m/wrK_6KnCPhsAAAAC/cat-dance.gif",
     "think again": "https://media1.tenor.com/m/GOabrbLMl4AAAAAd/plink-cat-plink.gif",
@@ -67,7 +71,13 @@ window.addEventListener("load", () => {
         document.querySelectorAll(".button").forEach(button => button.classList.add("hidden"));
     });
 
-    document.getElementById("no").addEventListener("click", () => {
+    button = document.getElementById("no")
+    function movebutton() {
+        button.removeEventListener('mousemove', movebutton);
+        var changeTop = (Math.random() * (window.innerHeight - 13 * button.offsetHeight));
+        var changeLeft = (Math.random() * (window.innerWidth - 3 * button.offsetWidth));
+        button.style.marginTop = changeTop + "px";
+        button.style.marginLeft = changeLeft + "px";
         const nextMessage = messages[currentIndex];
         const nextImage = preloadedImages[currentIndex];
         document.getElementById("message").textContent = nextMessage;
@@ -82,5 +92,11 @@ window.addEventListener("load", () => {
             document.getElementById("pic").src = choose(window.pictures);
             currentIndex--
         }
-    });
+
+        setTimeout(() => {
+            button.addEventListener("mousemove", movebutton, false);
+        }, 325);
+    }
+
+    button.addEventListener("mousemove", movebutton, false);
 });
