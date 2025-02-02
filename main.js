@@ -74,6 +74,7 @@ window.addEventListener("load", () => {
     button = document.getElementById("no")
     function movebutton() {
         button.removeEventListener('mousemove', movebutton);
+        button.removeEventListener('click', movebutton);
         var changeTop = (Math.random() * (window.innerHeight - 13 * button.offsetHeight));
         var changeLeft = (Math.random() * (window.innerWidth - 3 * button.offsetWidth));
         button.style.marginTop = changeTop + "px";
@@ -94,9 +95,11 @@ window.addEventListener("load", () => {
         }
 
         setTimeout(() => {
+            button.addEventListener("click", movebutton, false);
             button.addEventListener("mousemove", movebutton, false);
         }, 325);
     }
 
     button.addEventListener("mousemove", movebutton, false);
+    button.addEventListener("click", movebutton, false);
 });
